@@ -12,7 +12,7 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: './src',
+    contentBase: './dist',
     watchContentBase: true,
     watchOptions: {
       ignored: /node_modules/,
