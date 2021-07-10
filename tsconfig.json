@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "DOM.Iterable",
+      "ESNext"
+    ],
+    "strict": true,
+    "esModuleInterop": true,
+    "module": "ESNext",
+    "declaration": true,
+    "removeComments": true,
+    "target": "ESNext",
+    "sourceMap": true,
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "moduleResolution": "Node",
+    "noImplicitAny": true,
+    "resolveJsonModule": true,
+    "rootDir": ".",
+    "baseUrl": "src",
+    "isolatedModules": true
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "compileOnSave": false
+}
