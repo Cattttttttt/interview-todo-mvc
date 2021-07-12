@@ -1,0 +1,1 @@
+export const STORAGE_LIST = 'STORAGE_LIST'
