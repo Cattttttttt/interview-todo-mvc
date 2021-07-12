@@ -1,14 +1,15 @@
 import React from 'react';
-import { Box, Checkbox, IconButton, InputBase, makeStyles, Paper, TextField, Typography } from '@material-ui/core';
-import { CheckCircleOutline, ClearOutlined, RadioButtonUncheckedOutlined } from '@material-ui/icons';
+import { Box, IconButton, InputBase, makeStyles, Paper, Typography } from '@material-ui/core';
+import { ClearOutlined } from '@material-ui/icons';
 import clsx from 'clsx';
+import { TodoStatusComponentMap, TodoStatusTextMap, TodoStatusType } from './mvc_reducers';
 
 export interface IItemProps {
   id: number
   content: string
   setContent?: (id: number) => (event: React.FocusEvent<HTMLInputElement>) => void
-  status: boolean
-  setStatus: (id: number) => (event: React.ChangeEvent<HTMLInputElement>) => void
+  status: TodoStatusType
+  setStatus: (id: number) => () => void
   handleDelete: (id: number) => () => void
 }
 
@@ -46,6 +47,7 @@ const Item = (props: ItemProps) => {
 
   const [edit, setEdit] = React.useState(false);
   const styles = useStyles()
+  const statusStyles = TodoStatusTextMap();
 
   return (
     <Paper 
@@ -53,20 +55,18 @@ const Item = (props: ItemProps) => {
       className={clsx(styles.root)}
     >
       <Box>
-        <Checkbox
-          checked={props.status}
-          onChange={props.setStatus(props.id)}
-          icon={<RadioButtonUncheckedOutlined />}
-          checkedIcon={<CheckCircleOutline />}
-        />
+        <IconButton
+          onClick={props.setStatus(props.id)}
+        >
+          {TodoStatusComponentMap[props.status]}
+        </IconButton>
       </Box>
 
       <Box
         onDoubleClick={event => {
           props.setContent && setEdit(true);
-          event.currentTarget
         }}
-        className={clsx(styles.text, props.status && styles.textOnCompleted)}
+        className={clsx(statusStyles.root, statusStyles[props.status])}
       >
         {!edit 
           ? (
@@ -77,6 +77,7 @@ const Item = (props: ItemProps) => {
           </Typography>
           ) : (
             <InputBase
+              autoFocus
               fullWidth
               defaultValue={props.content}
               className={clsx(styles.input)}
