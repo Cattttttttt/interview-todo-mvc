@@ -2,18 +2,8 @@ import React from 'react';
 import { Box, IconButton, InputBase, makeStyles, Paper, Typography } from '@material-ui/core';
 import { ClearOutlined } from '@material-ui/icons';
 import clsx from 'clsx';
-import { TodoStatusComponentMap, TodoStatusTextMap, TodoStatusType } from './mvc_reducers';
-
-export interface IItemProps {
-  id: number
-  content: string
-  setContent?: (id: number) => (event: React.FocusEvent<HTMLInputElement>) => void
-  status: TodoStatusType
-  setStatus: (id: number) => () => void
-  handleDelete: (id: number) => () => void
-}
-
-export type ItemProps = Readonly<IItemProps>;
+import { TodoStatusComponentMap, TodoStatusTextMap } from './mvc_constants';
+import { ItemProps } from './mvc_types';
 
 const useStyles = makeStyles({
   root: {

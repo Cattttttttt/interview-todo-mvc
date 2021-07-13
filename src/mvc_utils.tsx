@@ -1,16 +1,10 @@
 import { STORAGE_LIST } from './mvc_constants';
-import { ItemProperties } from './mvc_layout';
+import { ItemProperties, StorageList } from './mvc_types';
 import base64 from 'base-64';
-
-export interface IStorageList {
-  list?: ItemProperties[]
-};
-
-export type StorageList = IStorageList;
 
 export const getItemList = (): ItemProperties[] => {
   try {
-    const tmpObj: IStorageList = JSON.parse(base64.decode(localStorage.getItem(STORAGE_LIST) || ''));
+    const tmpObj: StorageList = JSON.parse(base64.decode(localStorage.getItem(STORAGE_LIST) || ''));
     return tmpObj.list || [];
   } catch(e) {
     return [];

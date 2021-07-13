@@ -2,17 +2,9 @@ import React from 'react';
 
 import Item from './mvc_item';
 import Input from './mvc_input';
-import { TodoStatusType, TODO_STATUS_DEFAULT } from './mvc_reducers'
+import { TODO_STATUS_DEFAULT } from './mvc_constants'
 import { Box, Divider } from '@material-ui/core';
 import { useLists } from './mvc_useLists';
-
-export interface IItemProperties {
-  content: string
-  status: TodoStatusType
-  id: number
-};
-
-export type ItemProperties = IItemProperties;
 
 const Layout = () => {
   const { data: list, add, changeContent, changeState, deleteItem } = useLists();

@@ -1,5 +1,6 @@
-import { TodoReducers, TODO_CHANGE_STATUS } from './mvc_reducers';
-import { ItemProperties } from './mvc_layout';
+import { TodoReducers } from './mvc_reducers';
+import { TODO_CHANGE_STATUS } from './mvc_constants';
+import { ItemProperties } from './mvc_types';
 import { getItemList, setItemList } from './mvc_utils';
 import React from 'react';
 

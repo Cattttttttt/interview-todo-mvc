@@ -1,12 +1,6 @@
 import { Box, InputBase, makeStyles, Paper } from '@material-ui/core';
 import clsx from 'clsx';
-import React from 'react';
-
-export interface IInputProps {
-  handleSubmit: (event: React.KeyboardEvent<HTMLInputElement>) => void
-};
-
-export type InputProps = Readonly<IInputProps>;
+import { InputProps } from './mvc_types';
 
 const useStyles = makeStyles({
   root: {
