@@ -17,23 +17,26 @@ export const useLists = () => {
       if (id === -1) {
         return data.map(item => TodoReducers(item, TODO_CHANGE_STATUS));
       }
+      const index = data.findIndex(item => item.id === id);
       return [
-        ...data.slice(0, id),
-        TodoReducers(data[id], TODO_CHANGE_STATUS),
-        ...data.slice(id + 1),
+        ...data.slice(0, index),
+        TodoReducers(data[index], TODO_CHANGE_STATUS),
+        ...data.slice(index + 1),
       ]
   });
   }, [TodoReducers]);
 
   const changeContent = React.useCallback((id: number, content: string) => {
-    setData(data => [
-      ...data.slice(0, id),
+    setData(data => {
+      const index = data.findIndex(item => item.id === id);
+      return [
+      ...data.slice(0, index),
       {
-        ...data[id],
+        ...data[index],
         content,
       },
-      ...data.slice(id + 1),
-    ]);
+      ...data.slice(index + 1),
+    ]});
   }, []);
 
   const add = React.useCallback((item: ItemProperties) => {
@@ -43,14 +46,10 @@ export const useLists = () => {
     ]);
   }, []);
 
-  const deleteItem = React.useCallback((id = -1) => {
+  const deleteItem = React.useCallback((ids: number[] = []) => {
     setData(data => {
-      if (id === -1) return [];
-      const target = data.findIndex(item => item.id === id);
-      return [
-        ...data.slice(0, target),
-        ...data.slice(target + 1),
-      ]
+      if (ids.length === 0) return [];
+      return data.filter(item => !ids.includes(item.id));
     });
   }, []);
 
