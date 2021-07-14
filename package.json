@@ -6,7 +6,8 @@
   "author": "Cattttttttt <neko@qwq.icu>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack serve --mode development"
+    "start": "webpack serve --mode development",
+    "build": "webpack"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.5",

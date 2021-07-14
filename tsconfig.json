@@ -8,7 +8,7 @@
     "strict": true,
     "esModuleInterop": true,
     "module": "ESNext",
-    "declaration": true,
+    "declaration": false,
     "removeComments": true,
     "target": "ESNext",
     "sourceMap": true,
