@@ -11,6 +11,10 @@ export const TODO_STATUS_COMPLETED = 'TODO_STATUS_COMPLETED';
 export const TODO_STATUS_DEFAULT = TODO_STATUS_ACTIVE;
 
 export const TodoStatusLists: TodoStatusType[] = [TODO_STATUS_ACTIVE, TODO_STATUS_COMPLETED];
+export const TodoStatusLabel = {
+  TODO_STATUS_ACTIVE: 'Active',
+  TODO_STATUS_COMPLETED: 'Completed',
+};
 
 export const TodoStatusComponentMap = {
   TODO_STATUS_ACTIVE: <RadioButtonUncheckedOutlined />,
