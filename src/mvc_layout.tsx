@@ -64,7 +64,7 @@ const Layout = () => {
   const actions: StatusAction[] = [
     {
       action: React.useCallback(() => {
-        deleteItem(list.reduce<number[]>((pre, cur) => cur.status === 'TODO_STATUS_COMPLETED' ? [...pre, cur.id] : [...pre], []));
+        deleteItem(list.reduce<number[]>((pre, cur) => cur.status === 'TODO_STATUS_COMPLETED' ? [...pre, cur.id] : [...pre], [-1]));
       }, [list]),
       label: 'Clear completed',
     },
