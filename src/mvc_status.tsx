@@ -29,16 +29,17 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    '&: hover': {
-      borderWidth: '1px',
-      borderStyle: 'solid',
-      borderColor: '#D9D9D9',
-      borderRadius: '2px',
-    }
-  },
-  curFilter: {
     borderWidth: '1px',
     borderStyle: 'solid',
+    borderColor: '#FFFFFF',
+  },
+  notCurFilter: {
+    '&:hover': {
+      borderColor: '#D9D9D9',
+      borderRadius: '5px',
+    },
+  },
+  curFilter: {
     borderColor: '#000000',
     borderRadius: '5px',
   },
@@ -70,7 +71,8 @@ const StatusBar = (props: StatusProps) => {
           return (
             <Box
               onClick={props.filters[item]?.filter}
-              className={clsx(styles.filter, props.curFilter === item && styles.curFilter)}
+              key={index}
+              className={clsx(styles.filter, props.curFilter === item ? styles.curFilter : styles.notCurFilter)}
             >
               <Typography
                 variant="body2"
