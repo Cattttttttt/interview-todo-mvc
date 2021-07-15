@@ -17,12 +17,12 @@ const useStyles = makeStyles({
   text: {
     flexGrow: 1,
     wordBreak: 'break-all',
-    transition: 'all 0.4s'
+    transition: 'all 0.4s',
   },
   textOnCompleted: {
     color: '#D9D9D9',
     textDecoration: 'line-through solid #D9D9D9 2px',
-    transition: 'all 0.4s'
+    transition: 'all 0.4s',
   },
   input: {
     borderStyle: 'solid',
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
     borderColor: '#D9D9D9',
     lineHeight: '1.5rem',
     fontSize: '1.5rem',
-  }
+  },
 });
 
 const Item = (props: ItemProps): JSX.Element => {

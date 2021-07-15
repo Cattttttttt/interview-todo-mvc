@@ -50,7 +50,7 @@ const Layout = (): JSX.Element => {
           setCurFilter(cur);
         }, [list]),
         label: TodoStatusLabel[cur],
-      }
+      },
     };
   }, { 
     All: {
@@ -58,7 +58,7 @@ const Layout = (): JSX.Element => {
         setCurFilter('All');
       }, [list]),
       label: 'All',
-    }
+    },
   });
 
   const actions: StatusAction[] = [

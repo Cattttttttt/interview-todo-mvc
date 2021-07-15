@@ -45,6 +45,10 @@ module.exports = {
             'error',
             'always'
         ],
+        'comma-dangle': [
+          'error',
+          'always-multiline'
+        ],
         'react/jsx-uses-react': 'off',
         'react/react-in-jsx-scope': 'off'
     }
