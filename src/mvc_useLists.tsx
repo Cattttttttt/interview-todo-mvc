@@ -4,7 +4,17 @@ import { ItemProperties } from './mvc_types';
 import { getItemList, setItemList } from './mvc_utils';
 import React from 'react';
 
-export const useLists = () => {
+export interface IUseLists {
+  data: ItemProperties[]
+  changeState: (id?: number) => void
+  changeContent: (id: number, newContent: string) => void
+  add: (item: ItemProperties) => void
+  deleteItem: (ids?: number[]) => void
+}
+
+export type UseLists = Readonly<IUseLists>;
+
+export const useLists = (): UseLists => {
 
   const [data, setData] = React.useState(getItemList());
 
@@ -22,21 +32,22 @@ export const useLists = () => {
         ...data.slice(0, index),
         TodoReducers(data[index], TODO_CHANGE_STATUS),
         ...data.slice(index + 1),
-      ]
-  });
+      ];
+    });
   }, [TodoReducers]);
 
   const changeContent = React.useCallback((id: number, content: string) => {
     setData(data => {
       const index = data.findIndex(item => item.id === id);
       return [
-      ...data.slice(0, index),
-      {
-        ...data[index],
-        content,
-      },
-      ...data.slice(index + 1),
-    ]});
+        ...data.slice(0, index),
+        {
+          ...data[index],
+          content,
+        },
+        ...data.slice(index + 1),
+      ];
+    });
   }, []);
 
   const add = React.useCallback((item: ItemProperties) => {
@@ -59,5 +70,5 @@ export const useLists = () => {
     changeContent,
     add,
     deleteItem,
-  }
+  };
 };

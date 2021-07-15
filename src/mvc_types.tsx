@@ -7,14 +7,14 @@ export type TodoAction = typeof TODO_CHANGE_STATUS;
 export interface IStatusFilter {
   filter: () => void
   label: string
-};
+}
 
 export type StatusFilter = Readonly<IStatusFilter>;
 
 export interface IStatusAction {
   action: () => void
   label: string
-};
+}
 
 export type StatusAction = Readonly<IStatusAction>;
 export type StatusFilters = Record<TodoFilterType, StatusFilter>;
@@ -24,7 +24,7 @@ export interface IStatusProps {
   filters: Partial<StatusFilters>
   actions: StatusAction[]
   curFilter: TodoFilterType
-};
+}
 
 export type StatusProps = Readonly<IStatusProps>;
 
@@ -32,7 +32,7 @@ export interface IItemProperties {
   content: string
   status: TodoStatusType
   id: number
-};
+}
 
 export type ItemProperties = IItemProperties;
 
@@ -49,12 +49,12 @@ export type ItemProps = Readonly<IItemProps>;
 
 export interface IInputProps {
   handleSubmit: (event: React.KeyboardEvent<HTMLInputElement>) => void
-};
+}
 
 export type InputProps = Readonly<IInputProps>;
 
 export interface IStorageList {
   list?: ItemProperties[]
-};
+}
 
 export type StorageList = IStorageList;

@@ -31,12 +31,12 @@ const useStyles = makeStyles({
     lineHeight: '1.5rem',
     fontSize: '1.5rem',
   }
-})
+});
 
-const Item = (props: ItemProps) => {
+const Item = (props: ItemProps): JSX.Element => {
 
   const [edit, setEdit] = React.useState(false);
-  const styles = useStyles()
+  const styles = useStyles();
   const statusStyles = TodoStatusTextMap();
 
   return (
@@ -53,18 +53,18 @@ const Item = (props: ItemProps) => {
       </Box>
 
       <Box
-        onDoubleClick={event => {
+        onDoubleClick={() => {
           props.setContent && setEdit(true);
         }}
         className={clsx(statusStyles.root, statusStyles[props.status])}
       >
         {!edit 
           ? (
-          <Typography
-            variant="h5"
-          >
-            {props.content}
-          </Typography>
+            <Typography
+              variant="h5"
+            >
+              {props.content}
+            </Typography>
           ) : (
             <InputBase
               autoFocus

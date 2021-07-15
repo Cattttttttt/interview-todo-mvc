@@ -12,7 +12,7 @@ const useStyles = makeStyles({
   },
 });
 
-const App = () => {
+const App = (): JSX.Element => {
   const styles = useStyles();
 
   return (

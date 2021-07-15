@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Input = (props: InputProps) => {
+const Input = (props: InputProps): JSX.Element => {
 
   const styles = useStyles();
 
@@ -36,7 +36,7 @@ const Input = (props: InputProps) => {
         />
       </Box>
     </Paper>
-  )
+  );
 };
 
 export default Input;

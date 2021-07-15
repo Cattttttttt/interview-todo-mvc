@@ -11,6 +11,6 @@ export const getItemList = (): ItemProperties[] => {
   }
 };
 
-export const setItemList = (list: ItemProperties[]) => {
+export const setItemList = (list: ItemProperties[]): void => {
   localStorage.setItem(STORAGE_LIST, base64.encode(JSON.stringify({ list })));
 };

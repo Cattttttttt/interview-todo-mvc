@@ -1,6 +1,6 @@
-import { StatusProps, TodoFilterType } from "./mvc_types";
-import { Box, Button, makeStyles, Paper, Typography } from "@material-ui/core";
-import clsx from "clsx";
+import { StatusProps, TodoFilterType } from './mvc_types';
+import { Box, Button, makeStyles, Paper, Typography } from '@material-ui/core';
+import clsx from 'clsx';
 
 const useStyles = makeStyles({
   root: {
@@ -45,7 +45,7 @@ const useStyles = makeStyles({
   },
 });
 
-const StatusBar = (props: StatusProps) => {
+const StatusBar = (props: StatusProps): JSX.Element => {
   const styles = useStyles();
 
   return (
@@ -97,7 +97,7 @@ const StatusBar = (props: StatusProps) => {
                 {item.label}
               </Typography>
             </Button>
-          )
+          );
         })}
       </Box>
     </Paper>

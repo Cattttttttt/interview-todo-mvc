@@ -2,13 +2,13 @@ import React from 'react';
 
 import Item from './mvc_item';
 import Input from './mvc_input';
-import { TodoStatusLabel, TodoStatusLists, TODO_STATUS_DEFAULT } from './mvc_constants'
+import { TodoStatusLabel, TodoStatusLists, TODO_STATUS_DEFAULT } from './mvc_constants';
 import { Box, Divider } from '@material-ui/core';
 import { useLists } from './mvc_useLists';
 import StatusBar from './mvc_status';
 import { StatusAction, StatusFilters, TodoFilterType } from './mvc_types';
 
-const Layout = () => {
+const Layout = (): JSX.Element => {
   const { data: list, add, changeContent, changeState, deleteItem } = useLists();
   const [filteredList, setFilteredList] = React.useState(list);
   const [curFilter, setCurFilter] = React.useState<TodoFilterType>('All');
@@ -51,7 +51,7 @@ const Layout = () => {
         }, [list]),
         label: TodoStatusLabel[cur],
       }
-    }
+    };
   }, { 
     All: {
       filter: React.useCallback(() => {
