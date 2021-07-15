@@ -48,7 +48,7 @@ export const DeleteTodo: Koa.Middleware = async (ctx, next) => {
         (ctx.request.body as DeleteTodoBody).list,
         async item => {
           const cnt = await TodoModel.count({ hashId: item.hashId, user: userToken });
-          return cnt !== 0;
+          return cnt === 1;
         },
       )
         .then(data => data.map(async item => {
@@ -68,11 +68,11 @@ export const UpdateTodo: Koa.Middleware = async (ctx, next) => {
   const userToken = checkToken(ctx.request.headers.authorization || '');
   if (userToken) {
     try {
-      const saveData = await asyncFilter(
+      await asyncFilter(
         (ctx.request.body as UpdateTodoBody).list,
         async item => {
           const cnt = await TodoModel.count({ hashId: item.hashId, user: userToken });
-          return cnt === 0;
+          return cnt === 1;
         },
       )
         .then(data => data.map(async item => {
@@ -84,7 +84,6 @@ export const UpdateTodo: Koa.Middleware = async (ctx, next) => {
             },
           );
         }));
-      await TodoModel.create(saveData);
       ctx.status = 201;
     } catch (e) {
       ctx.status = 500;
