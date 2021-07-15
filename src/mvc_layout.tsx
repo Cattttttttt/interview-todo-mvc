@@ -21,7 +21,7 @@ const Layout = (): JSX.Element => {
       add({
         content: event.currentTarget.value,
         status: TODO_STATUS_DEFAULT,
-        id: md5(uuid() + event.currentTarget.value),
+        id: md5(uuid()),
       });
       event.currentTarget.value = '';
     }
