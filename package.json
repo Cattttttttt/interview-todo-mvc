@@ -8,7 +8,8 @@
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "webpack",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "start:server": "cd server && yarn start"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.5",
