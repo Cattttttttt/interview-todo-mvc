@@ -31,18 +31,18 @@ export type StatusProps = Readonly<IStatusProps>;
 export interface IItemProperties {
   content: string
   status: TodoStatusType
-  id: number
+  id: string
 }
 
 export type ItemProperties = IItemProperties;
 
 export interface IItemProps {
-  id: number
+  id: string
   content: string
-  setContent?: (id: number) => (event: React.FocusEvent<HTMLInputElement>) => void
+  setContent?: (id: string) => (event: React.FocusEvent<HTMLInputElement>) => void
   status: TodoStatusType
-  setStatus: (id: number) => () => void
-  handleDelete: (id: number) => () => void
+  setStatus: (id: string) => () => void
+  handleDelete: (id: string) => () => void
 }
 
 export type ItemProps = Readonly<IItemProps>;

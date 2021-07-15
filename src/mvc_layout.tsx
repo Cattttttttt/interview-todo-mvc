@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { v4 as uuid } from 'uuid';
+import md5 from 'md5';
+
 import Item from './mvc_item';
 import Input from './mvc_input';
 import { TodoStatusLabel, TodoStatusLists, TODO_STATUS_DEFAULT } from './mvc_constants';
@@ -18,25 +21,25 @@ const Layout = (): JSX.Element => {
       add({
         content: event.currentTarget.value,
         status: TODO_STATUS_DEFAULT,
-        id: list.length ? list[list.length - 1].id + 1 : 0,
+        id: md5(uuid() + event.currentTarget.value),
       });
       event.currentTarget.value = '';
     }
   }, [list]);
 
-  const setStatus = React.useCallback((id: number) => {
+  const setStatus = React.useCallback((id: string) => {
     return () => {
       changeState(id);
     };
   }, []);
 
-  const setContent = React.useCallback((id: number) => {
+  const setContent = React.useCallback((id: string) => {
     return (event: React.FocusEvent<HTMLInputElement>) => {
       changeContent(id, event.target.value);
     };
   }, []);
 
-  const handleDelete = React.useCallback((id: number) => {
+  const handleDelete = React.useCallback((id: string) => {
     return () => {
       deleteItem([id]);
     };
@@ -64,7 +67,7 @@ const Layout = (): JSX.Element => {
   const actions: StatusAction[] = [
     {
       action: React.useCallback(() => {
-        deleteItem(list.reduce<number[]>((pre, cur) => cur.status === 'TODO_STATUS_COMPLETED' ? [...pre, cur.id] : [...pre], [-1]));
+        deleteItem(list.reduce<string[]>((pre, cur) => cur.status === 'TODO_STATUS_COMPLETED' ? [...pre, cur.id] : [...pre], ['']));
       }, [list]),
       label: 'Clear completed',
     },

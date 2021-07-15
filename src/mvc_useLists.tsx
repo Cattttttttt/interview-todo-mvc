@@ -6,10 +6,10 @@ import React from 'react';
 
 export interface IUseLists {
   data: ItemProperties[]
-  changeState: (id?: number) => void
-  changeContent: (id: number, newContent: string) => void
+  changeState: (id?: string) => void
+  changeContent: (id: string, newContent: string) => void
   add: (item: ItemProperties) => void
-  deleteItem: (ids?: number[]) => void
+  deleteItem: (ids?: string[]) => void
 }
 
 export type UseLists = Readonly<IUseLists>;
@@ -22,9 +22,9 @@ export const useLists = (): UseLists => {
     setItemList(data);
   }, [data]);
 
-  const changeState = React.useCallback((id = -1) => {
+  const changeState = React.useCallback((id = '') => {
     setData(data => {
-      if (id === -1) {
+      if (id === '') {
         return data.map(item => TodoReducers(item, TODO_CHANGE_STATUS));
       }
       const index = data.findIndex(item => item.id === id);
@@ -36,7 +36,7 @@ export const useLists = (): UseLists => {
     });
   }, [TodoReducers]);
 
-  const changeContent = React.useCallback((id: number, content: string) => {
+  const changeContent = React.useCallback((id: string, content: string) => {
     setData(data => {
       const index = data.findIndex(item => item.id === id);
       return [
@@ -57,7 +57,7 @@ export const useLists = (): UseLists => {
     ]);
   }, []);
 
-  const deleteItem = React.useCallback((ids: number[] = []) => {
+  const deleteItem = React.useCallback((ids: string[] = []) => {
     setData(data => {
       if (ids.length === 0) return [];
       return data.filter(item => !ids.includes(item.id));
