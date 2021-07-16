@@ -3,6 +3,7 @@ import { TODO_CHANGE_STATUS } from './mvc_constants';
 import { ItemProperties } from './mvc_types';
 import { getItemList, setItemList } from './mvc_utils';
 import React from 'react';
+import { useFetch } from './mvc_useFetch';
 
 export interface IUseLists {
   data: ItemProperties[]
@@ -10,6 +11,7 @@ export interface IUseLists {
   changeContent: (id: string, newContent: string) => void
   add: (item: ItemProperties) => void
   deleteItem: (ids?: string[]) => void
+  setData: React.Dispatch<React.SetStateAction<ItemProperties[]>>
 }
 
 export type UseLists = Readonly<IUseLists>;
@@ -17,6 +19,7 @@ export type UseLists = Readonly<IUseLists>;
 export const useLists = (): UseLists => {
 
   const [data, setData] = React.useState(getItemList());
+  const { addTodo, updateTodo, deleteTodo } = useFetch();
 
   React.useEffect(() => {
     setItemList(data);
@@ -25,20 +28,28 @@ export const useLists = (): UseLists => {
   const changeState = React.useCallback((id = '') => {
     setData(data => {
       if (id === '') {
-        return data.map(item => TodoReducers(item, TODO_CHANGE_STATUS));
+        const nextData = data.map(item => TodoReducers(item, TODO_CHANGE_STATUS));
+        updateTodo(nextData);
+        return nextData;
       }
-      const index = data.findIndex(item => item.id === id);
+      const index = data.findIndex(item => item.hashId === id);
+      const changedTodo = TodoReducers(data[index], TODO_CHANGE_STATUS);
+      updateTodo([changedTodo]);
       return [
         ...data.slice(0, index),
-        TodoReducers(data[index], TODO_CHANGE_STATUS),
+        changedTodo,
         ...data.slice(index + 1),
       ];
     });
-  }, [TodoReducers]);
+  }, [updateTodo]);
 
   const changeContent = React.useCallback((id: string, content: string) => {
     setData(data => {
-      const index = data.findIndex(item => item.id === id);
+      const index = data.findIndex(item => item.hashId === id);
+      updateTodo([{
+        ...data[index],
+        content,
+      }]);
       return [
         ...data.slice(0, index),
         {
@@ -48,21 +59,26 @@ export const useLists = (): UseLists => {
         ...data.slice(index + 1),
       ];
     });
-  }, []);
+  }, [updateTodo]);
 
   const add = React.useCallback((item: ItemProperties) => {
     setData(data => [
       ...data,
       item,
     ]);
-  }, []);
+    addTodo([item]);
+  }, [addTodo]);
 
   const deleteItem = React.useCallback((ids: string[] = []) => {
     setData(data => {
-      if (ids.length === 0) return [];
-      return data.filter(item => !ids.includes(item.id));
+      if (ids.length === 0) {
+        deleteTodo(data);
+        return [];
+      }
+      deleteTodo(data.filter(item => ids.includes(item.hashId)));
+      return data.filter(item => !ids.includes(item.hashId));
     });
-  }, []);
+  }, [deleteTodo]);
 
   return {
     data,
@@ -70,5 +86,6 @@ export const useLists = (): UseLists => {
     changeContent,
     add,
     deleteItem,
+    setData,
   };
 };

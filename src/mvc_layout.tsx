@@ -10,9 +10,12 @@ import { Box, Divider } from '@material-ui/core';
 import { useLists } from './mvc_useLists';
 import StatusBar from './mvc_status';
 import { StatusAction, StatusFilters, TodoFilterType } from './mvc_types';
+import SyncBar from './mvc_sync';
+import { getUserToken } from './mvc_utils';
 
 const Layout = (): JSX.Element => {
-  const { data: list, add, changeContent, changeState, deleteItem } = useLists();
+  const { data: list, add, changeContent, changeState, deleteItem, setData } = useLists();
+  const [sync, setSync] = React.useState(!!getUserToken());
   const [filteredList, setFilteredList] = React.useState(list);
   const [curFilter, setCurFilter] = React.useState<TodoFilterType>('All');
 
@@ -21,54 +24,55 @@ const Layout = (): JSX.Element => {
       add({
         content: event.currentTarget.value,
         status: TODO_STATUS_DEFAULT,
-        id: md5(uuid()),
+        hashId: md5(uuid()),
+        updatedAt: Date.now(),
       });
       event.currentTarget.value = '';
     }
-  }, [list]);
+  }, [add]);
 
   const setStatus = React.useCallback((id: string) => {
     return () => {
       changeState(id);
     };
-  }, []);
+  }, [changeState]);
 
   const setContent = React.useCallback((id: string) => {
     return (event: React.FocusEvent<HTMLInputElement>) => {
       changeContent(id, event.target.value);
     };
-  }, []);
+  }, [changeContent]);
 
   const handleDelete = React.useCallback((id: string) => {
     return () => {
       deleteItem([id]);
     };
-  }, []);
+  }, [deleteItem]);
 
   const filters: Partial<StatusFilters> = TodoStatusLists.reduce((pre, cur) => {
     return {
       ...pre,
       [cur]: {
-        filter: React.useCallback(() => {
+        filter: () => {
           setCurFilter(cur);
-        }, [list]),
+        },
         label: TodoStatusLabel[cur],
       },
     };
   }, { 
     All: {
-      filter: React.useCallback(() => {
+      filter: () => {
         setCurFilter('All');
-      }, [list]),
+      },
       label: 'All',
     },
   });
 
   const actions: StatusAction[] = [
     {
-      action: React.useCallback(() => {
-        deleteItem(list.reduce<string[]>((pre, cur) => cur.status === 'TODO_STATUS_COMPLETED' ? [...pre, cur.id] : [...pre], ['']));
-      }, [list]),
+      action: () => {
+        deleteItem(list.reduce<string[]>((pre, cur) => cur.status === 'TODO_STATUS_COMPLETED' ? [...pre, cur.hashId] : [...pre], ['']));
+      },
       label: 'Clear completed',
     },
   ];
@@ -97,7 +101,7 @@ const Layout = (): JSX.Element => {
             setContent={setContent}
             status={item.status}
             setStatus={setStatus}
-            id={item.id}
+            id={item.hashId}
             handleDelete={handleDelete}
           />
         </Box>
@@ -109,6 +113,13 @@ const Layout = (): JSX.Element => {
         filters={filters}
         actions={actions}
       />}
+      <Divider />
+      <SyncBar
+        data={list}
+        setData={setData}
+        sync={sync}
+        setSync={setSync}
+      />
     </Box>
   );
 };
