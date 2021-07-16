@@ -20,7 +20,7 @@ export const GetTodoList: Koa.Middleware = async (ctx, next) => {
   const userToken = checkToken(ctx.request.headers.authorization || '');
   const data = await TodoModel.find({
     user: userToken,
-  }).lean();
+  }).select({ hashId: 1, content: 1, status: 1, updatedAt: 1 }).lean();
   ctx.body = data;
   ctx.status = 200;
   await next();
@@ -60,7 +60,7 @@ export const DeleteTodo: Koa.Middleware = async (ctx, next) => {
   const userToken = checkToken(ctx.request.headers.authorization || '');
   const res = requestBodySchema.validate(ctx.request.body);
   if (res.error) {
-    ctx.body = res.error;
+    ctx.body = res.error.message;
     ctx.status = 400;
   } else if (userToken) {
     try {
@@ -72,7 +72,7 @@ export const DeleteTodo: Koa.Middleware = async (ctx, next) => {
         },
       )
         .then(data => data.map(async item => {
-          await TodoModel.deleteOne({ hashId: item.hashId });
+          await TodoModel.deleteOne({ hashId: item.hashId, user: userToken });
         }));
       ctx.status = 201;
     } catch (e) {
@@ -88,7 +88,7 @@ export const UpdateTodo: Koa.Middleware = async (ctx, next) => {
   const userToken = checkToken(ctx.request.headers.authorization || '');
   const res = requestBodySchema.validate(ctx.request.body);
   if (res.error) {
-    ctx.body = res.error;
+    ctx.body = res.error.message;
     ctx.status = 400;
   } else if (userToken) {
     try {
@@ -101,7 +101,7 @@ export const UpdateTodo: Koa.Middleware = async (ctx, next) => {
       )
         .then(data => data.map(async item => {
           await TodoModel.updateOne(
-            { hashId: item.hashId }, 
+            { hashId: item.hashId, user: userToken }, 
             {
               ...item,
               user: userToken,

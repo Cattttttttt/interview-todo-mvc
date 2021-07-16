@@ -6,7 +6,6 @@ export const TodoSchema = new mongoose.Schema({
   hashId: {
     type: Types.String,
     required: true,
-    unique: true,
   },
   content: {
     type: Types.String,
@@ -18,6 +17,10 @@ export const TodoSchema = new mongoose.Schema({
   },
   user: {
     type: Types.String,
+    required: true,
+  },
+  updatedAt: {
+    type: Types.Number,
     required: true,
   },
 });
