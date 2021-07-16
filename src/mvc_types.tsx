@@ -31,7 +31,8 @@ export type StatusProps = Readonly<IStatusProps>;
 export interface IItemProperties {
   content: string
   status: TodoStatusType
-  id: string
+  hashId: string
+  updatedAt: number
 }
 
 export type ItemProperties = IItemProperties;
