@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core';
 import { TodoStatusType } from './mvc_types';
 
 export const STORAGE_LIST = 'STORAGE_LIST';
+export const USER_TOKEN = 'USER_TOKEN';
 
 export const TODO_CHANGE_STATUS = 'TODO_CHANGE_STATUS';
 
