@@ -32,4 +32,4 @@ jobs:
       with:
         token: ${{ secrets.PAGES }}
         branch: gh-pages # The branch the action should deploy to.
-        folder: interview-todo-mvc/build
+        folder: dist
