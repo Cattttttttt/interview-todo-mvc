@@ -6,8 +6,8 @@ const router = new Router();
 router
   .get('/', GetTodoList)
   .post('/', AddTodo)
-  .delete('/', DeleteTodo)
   .put('/', UpdateTodo)
+  .put('/delete', DeleteTodo)
   .get('/user', CreateUser);
 
 export default router;    

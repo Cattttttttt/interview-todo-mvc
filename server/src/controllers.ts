@@ -9,7 +9,7 @@ export const listPropertiesSchema = Joi.object<ItemProperties, false, ItemProper
   hashId: Joi.string().required(),
   content: Joi.string().required(),
   status: Joi.string().valid(...TodoStatus).required(),
-  updatedAt: Joi.string().required(),
+  updatedAt: Joi.number().required(),
 });
 
 export const requestBodySchema = Joi.object({

@@ -7,7 +7,7 @@ export interface IItemProperties {
   content: string
   status: TodoStatusType
   hashId: string
-  updatedAt: string
+  updatedAt: number
 }
 
 export type ItemProperties = IItemProperties;

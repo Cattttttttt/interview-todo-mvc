@@ -1,6 +1,6 @@
 import Koa from 'koa';
 import mongoose from 'mongoose';
-import cors from 'koa-cors';
+import cors from '@koa/cors';
 import error from 'koa-json-error';
 import logger from 'koa-logger';
 import bodyParser from 'koa-bodyparser';
