@@ -1,7 +1,13 @@
+export const TodoStatus = ['TODO_STATUS_ACTIVE', 'TODO_STATUS_COMPLETED'];
+
+export type TodoStatusType = 'TODO_STATUS_ACTIVE' | 'TODO_STATUS_COMPLETED';
+export type TodoFilterType = TodoStatusType | 'All';
+
 export interface IItemProperties {
   content: string
-  status: string
+  status: TodoStatusType
   hashId: string
+  updatedAt: string
 }
 
 export type ItemProperties = IItemProperties;

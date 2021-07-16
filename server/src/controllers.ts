@@ -2,7 +2,19 @@ import Koa from 'koa';
 import { TodoModel } from './models';
 import { asyncFilter, checkToken, createToken } from './utils';
 import { v4 as uuid } from 'uuid';
-import { AddTodoBody, DeleteTodoBody, UpdateTodoBody } from './types';
+import Joi from 'joi';
+import { AddTodoBody, DeleteTodoBody, ItemProperties, TodoStatus, UpdateTodoBody } from './types';
+
+export const listPropertiesSchema = Joi.object<ItemProperties, false, ItemProperties>({
+  hashId: Joi.string().required(),
+  content: Joi.string().required(),
+  status: Joi.string().valid(...TodoStatus).required(),
+  updatedAt: Joi.string().required(),
+});
+
+export const requestBodySchema = Joi.object({
+  list: Joi.array().items(listPropertiesSchema),
+});
 
 export const GetTodoList: Koa.Middleware = async (ctx, next) => {
   const userToken = checkToken(ctx.request.headers.authorization || '');
@@ -16,7 +28,11 @@ export const GetTodoList: Koa.Middleware = async (ctx, next) => {
 
 export const AddTodo: Koa.Middleware = async (ctx, next) => {
   const userToken = checkToken(ctx.request.headers.authorization || '');
-  if (userToken) {
+  const res = requestBodySchema.validate(ctx.request.body);
+  if (res.error) {
+    ctx.body = res.error.message;
+    ctx.status = 400;
+  } else if (userToken) {
     try {
       const saveData = await asyncFilter(
         (ctx.request.body as AddTodoBody).list,
@@ -42,7 +58,11 @@ export const AddTodo: Koa.Middleware = async (ctx, next) => {
 
 export const DeleteTodo: Koa.Middleware = async (ctx, next) => {
   const userToken = checkToken(ctx.request.headers.authorization || '');
-  if (userToken) {
+  const res = requestBodySchema.validate(ctx.request.body);
+  if (res.error) {
+    ctx.body = res.error;
+    ctx.status = 400;
+  } else if (userToken) {
     try {
       await asyncFilter(
         (ctx.request.body as DeleteTodoBody).list,
@@ -66,7 +86,11 @@ export const DeleteTodo: Koa.Middleware = async (ctx, next) => {
 
 export const UpdateTodo: Koa.Middleware = async (ctx, next) => {
   const userToken = checkToken(ctx.request.headers.authorization || '');
-  if (userToken) {
+  const res = requestBodySchema.validate(ctx.request.body);
+  if (res.error) {
+    ctx.body = res.error;
+    ctx.status = 400;
+  } else if (userToken) {
     try {
       await asyncFilter(
         (ctx.request.body as UpdateTodoBody).list,
