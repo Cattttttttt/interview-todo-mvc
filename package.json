@@ -5,6 +5,7 @@
   "repository": "git@github.com:Cattttttttt/interview-todo-mvc.git",
   "author": "Cattttttttt <neko@qwq.icu>",
   "license": "MIT",
+  "homepage": "https://Cattttttttt.github.io/interview-todo-mvc",
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "webpack",
