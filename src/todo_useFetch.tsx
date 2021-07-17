@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
-import { ItemProperties } from './mvc_types';
-import { checkSync, getUserToken } from './mvc_utils';
+import { ItemProperties } from './todo_types';
+import { checkSync, getUserToken } from './todo_utils';
 
 export const AxiosConfig = {
   baseURL: 'https://irc.qwq.icu',

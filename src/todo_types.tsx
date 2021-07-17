@@ -1,4 +1,4 @@
-import { TodoStatusComponentMap, TODO_CHANGE_STATUS } from './mvc_constants';
+import { TodoStatusComponentMap, TODO_CHANGE_STATUS } from './todo_constants';
 
 export type TodoStatusType = keyof typeof TodoStatusComponentMap;
 export type TodoFilterType = TodoStatusType | 'All';

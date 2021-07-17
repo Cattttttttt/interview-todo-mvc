@@ -1,6 +1,6 @@
 import { Box, InputBase, makeStyles, Paper } from '@material-ui/core';
 import clsx from 'clsx';
-import { InputProps } from './mvc_types';
+import { InputProps } from './todo_types';
 
 const useStyles = makeStyles({
   root: {

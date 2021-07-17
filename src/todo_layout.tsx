@@ -3,15 +3,15 @@ import React from 'react';
 import { v4 as uuid } from 'uuid';
 import md5 from 'md5';
 
-import Item from './mvc_item';
-import Input from './mvc_input';
-import { TodoStatusLabel, TodoStatusLists, TODO_STATUS_DEFAULT } from './mvc_constants';
+import Item from './todo_item';
+import Input from './todo_input';
+import { TodoStatusLabel, TodoStatusLists, TODO_STATUS_DEFAULT } from './todo_constants';
 import { Box, Divider } from '@material-ui/core';
-import { useLists } from './mvc_useLists';
-import StatusBar from './mvc_status';
-import { StatusAction, StatusFilters, TodoFilterType } from './mvc_types';
-import SyncBar from './mvc_sync';
-import { getUserToken } from './mvc_utils';
+import { useLists } from './todo_useLists';
+import StatusBar from './todo_status';
+import { StatusAction, StatusFilters, TodoFilterType } from './todo_types';
+import SyncBar from './todo_sync';
+import { getUserToken } from './todo_utils';
 
 const Layout = (): JSX.Element => {
   const { data: list, add, changeContent, changeState, deleteItem, setData } = useLists();

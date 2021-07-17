@@ -1,6 +1,6 @@
 import { RadioButtonUncheckedOutlined, CheckCircleOutline } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core';
-import { TodoStatusType } from './mvc_types';
+import { TodoStatusType } from './todo_types';
 
 export const STORAGE_LIST = 'STORAGE_LIST';
 export const USER_TOKEN = 'USER_TOKEN';

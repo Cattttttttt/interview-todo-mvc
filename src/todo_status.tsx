@@ -1,4 +1,4 @@
-import { StatusProps, TodoFilterType } from './mvc_types';
+import { StatusProps, TodoFilterType } from './todo_types';
 import { Box, Button, makeStyles, Paper, Typography } from '@material-ui/core';
 import clsx from 'clsx';
 

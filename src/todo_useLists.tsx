@@ -1,9 +1,9 @@
-import { TodoReducers } from './mvc_reducers';
-import { TODO_CHANGE_STATUS } from './mvc_constants';
-import { ItemProperties } from './mvc_types';
-import { getItemList, setItemList } from './mvc_utils';
+import { TodoReducers } from './todo_reducers';
+import { TODO_CHANGE_STATUS } from './todo_constants';
+import { ItemProperties } from './todo_types';
+import { getItemList, setItemList } from './todo_utils';
 import React from 'react';
-import { useFetch } from './mvc_useFetch';
+import { useFetch } from './todo_useFetch';
 
 export interface IUseLists {
   data: ItemProperties[]

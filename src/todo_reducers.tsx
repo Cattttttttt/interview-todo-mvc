@@ -1,6 +1,6 @@
-import { ItemProperties } from './mvc_types';
-import { TodoAction } from './mvc_types';
-import { TodoStatusLists } from './mvc_constants';
+import { ItemProperties } from './todo_types';
+import { TodoAction } from './todo_types';
+import { TodoStatusLists } from './todo_constants';
 
 export const TodoReducers = (state: ItemProperties, action: TodoAction): ItemProperties => {
   switch (action) {

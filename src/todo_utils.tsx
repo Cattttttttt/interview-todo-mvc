@@ -1,5 +1,5 @@
-import { STORAGE_LIST, USER_TOKEN } from './mvc_constants';
-import { ItemProperties, StorageList } from './mvc_types';
+import { STORAGE_LIST, USER_TOKEN } from './todo_constants';
+import { ItemProperties, StorageList } from './todo_types';
 import base64 from 'base-64';
 
 export const getItemList = (): ItemProperties[] => {

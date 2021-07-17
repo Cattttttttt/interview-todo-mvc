@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box, CircularProgress, IconButton, InputBase, makeStyles, Paper } from '@material-ui/core';
-import { clearUserToken, getUserToken, setUserToken } from './mvc_utils';
-import { useFetch } from './mvc_useFetch';
+import { clearUserToken, getUserToken, setUserToken } from './todo_utils';
+import { useFetch } from './todo_useFetch';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { SyncDisabledOutlined, SyncOutlined } from '@material-ui/icons';
-import { ItemProperties } from 'mvc_types';
+import { ItemProperties } from './todo_types';
 import clsx from 'clsx';
 
 export interface ISyncBarProps {
