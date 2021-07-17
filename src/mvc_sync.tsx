@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, CircularProgress, IconButton, InputBase, makeStyles, Paper } from '@material-ui/core';
 import { clearUserToken, getUserToken, setUserToken } from './mvc_utils';
 import { useFetch } from './mvc_useFetch';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { SyncDisabledOutlined, SyncOutlined } from '@material-ui/icons';
 import { ItemProperties } from 'mvc_types';
 import clsx from 'clsx';
@@ -39,7 +39,7 @@ const SyncBar = (props: SyncBarProps): JSX.Element => {
 
   const styles = useStyles();
 
-  const { register, handleSubmit, reset } = useForm<{
+  const { handleSubmit, reset, control } = useForm<{
     userToken: string
   }>({
     defaultValues: {
@@ -47,8 +47,6 @@ const SyncBar = (props: SyncBarProps): JSX.Element => {
     },
   });
   const { loading, getTodo, createUser, updateTodo, addTodo } = useFetch();
-
-  const userToken = register('userToken');
 
   const onSubmit: SubmitHandler<{ userToken: string }> = async formData => {
     if (props.sync) {
@@ -99,9 +97,11 @@ const SyncBar = (props: SyncBarProps): JSX.Element => {
         <Box
           className={clsx(styles.input)}
         >
-          <InputBase 
-            fullWidth
-            inputRef={userToken.ref}
+          <Controller
+            name='userToken'
+            control={control}
+            defaultValue={getUserToken()}
+            render={({ field }) => <InputBase fullWidth {...field} />}
           />
         </Box>
 
