@@ -4,7 +4,7 @@ import { ItemProperties } from './mvc_types';
 import { checkSync, getUserToken } from './mvc_utils';
 
 export const AxiosConfig = {
-  baseURL: 'http://localhost:6000',
+  baseURL: 'https://irc.qwq.icu',
   timeout: 3000,
 };
 
